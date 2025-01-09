@@ -14,7 +14,8 @@ export default {
             fontFamily: {
                 sans: ['Figtree', ...defaultTheme.fontFamily.sans],
                 mono:['Poppins'],
-                gob:['Goblin One']
+                gob:['Goblin One'],
+                jost:['Jost'],
             },
         },
     },

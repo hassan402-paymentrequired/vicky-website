@@ -12,6 +12,13 @@
                 balcony: 0,
                 store: 0,
             },
+            showModal: false,
+            formData: {
+                name: '',
+                address: '',
+                email: '',
+                phone: ''
+            },
             roomPrices: {
                 bedroom: 2000,
                 dining: 1500,
@@ -39,13 +46,13 @@
         }"
         x-effect="calculatePrice()">
 
-        <h1 class="text-5xl font-gob max-sm:text-4xl text-center uppercase">Book Your Cleaning Session</h1>
+        <h1 class="text-5xl font-gob max-sm:text-3xl text-center uppercase">Book Your Cleaning Session</h1>
 
         <div class="flex items-center mt-16 w-full max-w-2xl flex-col mb-10 mx-auto justify-center bg-white p-5">
-            <p class="text-center text-2xl font-gob">Tell us about your home</p>
+            <p class="text-center text-2xl font-gob max-sm:text-xl">Tell us about your home</p>
 
             <!-- Flat Type -->
-            <div class="flex w-full justify-center gap-5 items-center mt-10">
+            <div class="flex w-full justify-center gap-5 items-center mt-10 max-md:flex-col">
                 <label for="flat" :class="{ 'border-green-800 bg-green-50': selected_flat === 'flat' }"
                     @click="$refs.flat.click()"
                     class="w-[250px] cursor-pointer h-[110px] justify-center rounded-md bg-white border border-[#ccc] flex flex-col items-center spacey-2">
@@ -70,7 +77,7 @@
             <!-- Room Counters -->
             <template x-for="(label, countKey) in roomTypes" :key="countKey">
                 <div class="flex w-full justify-between px-5 items-center mt-8">
-                    <h3 class="text-base font-gob" x-text="label"></h3>
+                    <h3 class="text-base font-gob max-sm:text-xs" x-text="label"></h3>
                     <div class="flex items-center gap-4">
                         <button @click="counts[countKey]--; calculatePrice()" x-bind:disabled="counts[countKey] === 0"
                             :class="{ 'bg-gray-300': counts[countKey] <= 0 }"
@@ -118,9 +125,10 @@
                 </span>
             </div>
 
-            <button class="w-full h-8 rounded-sm bg-green-500 text-white font-gob text-sm mt-5">
+            <button @click="showModal = !showModal" class="w-full h-10 rounded-sm bg-green-500 text-white font-gob text-sm mt-5">
                 Continue
             </button>
+             <x-service-modal />
         </div>
     </section>
 </x-layout.app>
