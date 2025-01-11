@@ -43,8 +43,7 @@
                     this.price *= 0.9; // Apply a 10% discount for recurring services
                 }
             }
-        }"
-        x-effect="calculatePrice()">
+        }" x-effect="calculatePrice()">
 
         <h1 class="text-5xl font-gob max-sm:text-3xl text-center uppercase">Book Your Cleaning Session</h1>
 
@@ -125,10 +124,19 @@
                 </span>
             </div>
 
-            <button @click="showModal = !showModal" class="w-full h-10 rounded-sm bg-green-500 text-white font-gob text-sm mt-5">
-                Continue
-            </button>
-             <x-service-modal />
+            @auth
+                <button @click="showModal = !showModal"
+                    class="w-full h-10 rounded-sm bg-green-500 text-white font-gob text-sm mt-5">
+                    Continue
+                </button>
+            @endauth
+            @guest
+                <a href="{{ route('login') }}"
+                    class="w-full h-10 rounded-sm bg-green-500 text-white font-gob text-sm mt-5 flex items-center justify-center">
+                    Log in to complete your booking
+                </a>
+            @endguest
+            <x-service-modal />
         </div>
     </section>
 </x-layout.app>

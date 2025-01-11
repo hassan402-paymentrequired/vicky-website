@@ -3,11 +3,10 @@
          <div class="flex lg:flex-1">
              <a href="#" class="-m-1.5 p-1.5">
                  <span class="sr-only">Your Company</span>
-                 <img class="h-12 w-auto" src="{{ asset('images/washing.png') }}"
-                     alt="">
+                 <img class="h-12 w-auto" src="{{ asset('images/washing.png') }}" alt="">
              </a>
          </div>
-         <div class="flex lg:hidden"  @click="isOn = !isOn">
+         <div class="flex lg:hidden" @click="isOn = !isOn">
              <button type="button"
                  class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-gray-700">
                  <span class="sr-only">Open main menu</span>
@@ -25,8 +24,11 @@
              <a href="#contact" class="text-sm/6 font-semibold text-gray-900">Contact</a>
          </div>
          <div class="hidden lg:flex lg:flex-1 lg:justify-end">
-             <a href="{{ route('login') }}" class="text-sm/6 font-semibold text-gray-900">Log in <span
-                     aria-hidden="true">&rarr;</span></a>
+             @guest
+
+                 <a href="{{ route('login') }}" class="text-sm/6 font-semibold text-gray-900">Log in <span
+                         aria-hidden="true">&rarr;</span></a>
+             @endguest
          </div>
      </nav>
      <!-- Mobile menu, show/hide based on menu open state. -->
@@ -38,8 +40,7 @@
              <div class="flex items-center justify-between">
                  <a href="#" class="-m-1.5 p-1.5">
                      <span class="sr-only">Your Company</span>
-                     <img class="h-8 w-auto" src="{{ asset('images/washing.png') }}"
-                         alt="">
+                     <img class="h-8 w-auto" src="{{ asset('images/washing.png') }}" alt="">
                  </a>
                  <button type="button" class="-m-2.5 rounded-md p-2.5 text-gray-700" @click="isOn = !isOn">
                      <svg class="size-6" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"
@@ -61,9 +62,11 @@
                              class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">Company</a>
                      </div>
                      <div class="py-6">
-                         <a href="{{ route('login') }}"
-                             class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">Log
-                             in</a>
+                         @guest
+                             <a href="{{ route('login') }}"
+                                 class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-gray-900 hover:bg-gray-50">Log
+                                 in</a>
+                         @endguest
                      </div>
                  </div>
              </div>
