@@ -1,49 +1,6 @@
 <x-layout.app>
     <section class="container relative flex flex-col h-full max-w-6xl px-10 mx-auto xl:px-0 mt-28" id="service"
-        x-data="{
-            selected_flat: 'flat',
-            freq: 'once',
-            price: 0,
-            counts: {
-                bedroom: 0,
-                dining: 0,
-                bathroom: 0,
-                kitchen: 0,
-                balcony: 0,
-                store: 0,
-            },
-            showModal: false,
-            formData: {
-                name: '',
-                address: '',
-                email: '',
-                phone: ''
-            },
-            roomPrices: {
-                bedroom: 2000,
-                dining: 1500,
-                bathroom: 1000,
-                kitchen: 1200,
-                balcony: 800,
-                store: 700,
-            },
-            roomTypes: {
-                bedroom: 'Bedroom',
-                dining: 'Living Rooms / Dining Areas',
-                bathroom: 'Toilets / Bathrooms',
-                kitchen: 'Kitchen',
-                balcony: 'Outdoor / Balcony',
-                store: 'Store',
-            },
-            calculatePrice() {
-                this.price = Object.keys(this.counts).reduce((total, key) => {
-                    return total + this.counts[key] * this.roomPrices[key];
-                }, 0);
-                if (this.freq === 'recurring') {
-                    this.price *= 0.9; // Apply a 10% discount for recurring services
-                }
-            }
-        }" x-effect="calculatePrice()">
+        x-data="roomBookingApp()" x-init="fetchRooms()" x-cloak>
 
         <h1 class="text-5xl font-gob max-sm:text-3xl text-center uppercase">Book Your Cleaning Session</h1>
 
@@ -78,7 +35,7 @@
                 <div class="flex w-full justify-between px-5 items-center mt-8">
                     <h3 class="text-base font-gob max-sm:text-xs" x-text="label"></h3>
                     <div class="flex items-center gap-4">
-                        <button @click="counts[countKey]--; calculatePrice()" x-bind:disabled="counts[countKey] === 0"
+                        <button @click="counts[countKey] = Math.max(0, counts[countKey] - 1); calculatePrice()"
                             :class="{ 'bg-gray-300': counts[countKey] <= 0 }"
                             class="w-7 h-7 flex items-center justify-center rounded-md bg-green-900 text-white font-gob">
                             -
@@ -139,4 +96,58 @@
             <x-service-modal />
         </div>
     </section>
+
+    <script>
+        function roomBookingApp() {
+            return {
+                selected_flat: 'flat',
+                freq: 'once',
+                price: 0,
+                counts: {},
+                showModal: false,
+                roomPrices: {},
+                  formData: {
+                    name: '',
+                    address: '',
+                    email: '',
+                    phone: '',
+                },
+                roomTypes: {},
+                fetchRooms() {
+                    fetch('/api/rooms')
+                        .then((response) => response.json())
+                        .then((data) => {
+                            this.roomPrices = data.reduce((acc, room) => {
+                                const key = room.name.toLowerCase().replace(/\s+/g, '_');
+                                acc[key] = room.price;
+                                return acc;
+                            }, {});
+                            this.roomTypes = data.reduce((acc, room) => {
+                                const key = room.name.toLowerCase().replace(/\s+/g, '_');
+                                acc[key] = room.name; // Use room name as label
+                                return acc;
+                            }, {});
+                            this.initializeCounts();
+                        })
+                        .catch((error) => {
+                            console.error('Error fetching rooms:', error);
+                        });
+                },
+                initializeCounts() {
+                    this.counts = Object.keys(this.roomPrices).reduce((acc, key) => {
+                        acc[key] = 0;
+                        return acc;
+                    }, {});
+                },
+                calculatePrice() {
+                    this.price = Object.keys(this.counts).reduce((total, key) => {
+                        return total + this.counts[key] * (this.roomPrices[key] || 0);
+                    }, 0);
+                    if (this.freq === 'recurring') {
+                        this.price *= 0.9;
+                    }
+                },
+            };
+        }
+    </script>
 </x-layout.app>

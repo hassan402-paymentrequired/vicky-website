@@ -13,7 +13,18 @@ return new class extends Migration
     {
         Schema::create('bookings', function (Blueprint $table) {
             $table->ulid("id")->primary();
-            $table->foreignUlid("user_id")->constrained("users")->cascadeOnDelete();
+            $table->foreignUlid("user_id")->index()->constrained("users")->cascadeOnDelete();
+            $table->string('cleaning_type');
+            $table->enum('flat_type', ['flat', 'duplet']);
+            $table->enum('frequency', ['once', 'recurring']);
+            $table->decimal('price', 10, 2);
+            $table->string('first_name');
+            $table->string('last_name');
+            $table->string('email');
+            $table->string('cleaning_date');
+            $table->string('location');
+            $table->string('location_area');
+            $table->string('note');
             $table->timestamps();
         });
     }

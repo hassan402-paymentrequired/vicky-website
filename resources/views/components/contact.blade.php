@@ -1,4 +1,4 @@
-<section class="bg-blue-50 " id="contact">
+<section class="bg-green-50 " id="contact">
     <div class="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-20">
         <div class="mb-4">
             <div class="mb-6 max-w-3xl text-center sm:text-center md:mx-auto md:mb-12">
@@ -22,7 +22,7 @@
                     </p>
                     <ul class="mb-6 md:mb-0">
                         <li class="flex">
-                            <div class="flex h-10 w-10 items-center justify-center rounded bg-blue-900 text-gray-50">
+                            <div class="flex h-10 w-10 items-center justify-center rounded bg-green-900 text-gray-50">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                     stroke-linejoin="round" class="h-6 w-6">
@@ -40,7 +40,7 @@
                             </div>
                         </li>
                         <li class="flex">
-                            <div class="flex h-10 w-10 items-center justify-center rounded bg-blue-900 text-gray-50">
+                            <div class="flex h-10 w-10 items-center justify-center rounded bg-green-900 text-gray-50">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                     stroke-linejoin="round" class="h-6 w-6">
@@ -59,7 +59,7 @@
                             </div>
                         </li>
                         <li class="flex">
-                            <div class="flex h-10 w-10 items-center justify-center rounded bg-blue-900 text-gray-50">
+                            <div class="flex h-10 w-10 items-center justify-center rounded bg-green-900 text-gray-50">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                     fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                                     stroke-linejoin="round" class="h-6 w-6">
@@ -93,7 +93,7 @@
                             </div>
                         </div>
                         <div class="text-center">
-                            <button type="submit" class="w-full bg-blue-800 text-white px-6 py-3 font-xl rounded-md sm:mb-0">Let's talk</button>
+                            <button type="submit" class="w-full bg-green-800 text-white px-6 py-3 font-xl rounded-md sm:mb-0">Let's talk</button>
                         </div>
                     </form>
                 </div>

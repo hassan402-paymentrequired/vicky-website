@@ -17,9 +17,9 @@ class AuthenticateUserController extends Controller
     }
 
     public function store(LoginRequest $request)
-    {
+    { 
         if (Auth::attempt($request->validated())) {
-            return redirect()->intended();
+            return redirect()->intended()->with('success', 'Logged in successfully');
         }
         return redirect()->back()->with('error', 'Invalid email or password');
     }
